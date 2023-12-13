@@ -6,12 +6,24 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://kit.fontawesome.com/af3ebb2bca.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
+    <header>
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <%= link_to root_path do %>
+            <%= image_tag "logo.png", width: 200, height: nil %>
+          <% end %>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right wf-mplus1p">
+        </nav>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
