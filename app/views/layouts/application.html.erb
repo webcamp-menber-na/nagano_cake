@@ -21,6 +21,15 @@
         </nav>
         <nav>
           <ul class="nav navbar-nav navbar-right wf-mplus1p">
+            <!--会員でログイン-->
+            <% if customer_signed_in? %>
+              <li class="welcome">ようこそ、<%= current_customer.last_name %>さん！</li>
+            <!--管理者ログイン-->
+            <% elsif admin_signed_in? %>
+            <!--ログインしてない-->
+            <% else %>
+            
+            <% end %>
         </nav>
       </div>
     </header>
