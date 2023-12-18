@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     resources :orders,only: [:new, :index, :create, :show]
     post '/orders/confirm' => 'orders#confirm'
     get '/orders/complete' => 'orders#complete'
-    resources :customers,only: [:show, :edit, :update]
+    resources :customers,only: [:show, :edit, :update], path: '/my_page', param: :customer_id do
+    end
     get '/customers/confirm' => 'customers#confirm'
     patch '/customers/withdrawal' => 'customers#withdrawal'
   end
