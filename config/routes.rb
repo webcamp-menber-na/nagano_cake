@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :orders,only: [:new, :index, :create, :show]
     post '/orders/confirm' => 'orders#confirm'
     get '/orders/complete' => 'orders#complete'
+    get "/customers/confirm" => "customers#confirm"
     patch "/customers/withdraw" => "customers#withdraw"
     resources :customers, path: 'my_page', only: [:show, :edit, :update]
     get '/customers/confirm' => 'customers#confirm'

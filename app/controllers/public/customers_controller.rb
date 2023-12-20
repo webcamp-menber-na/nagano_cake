@@ -9,4 +9,16 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
   end
   
+  def confirm
+  end
+  
+  def withdraw
+    @customer = current_customer
+    @customer.withdrawal_status = true
+    if @customer.save
+      reset_session
+      redirect_to root_path
+    end
+    
+  end
 end
