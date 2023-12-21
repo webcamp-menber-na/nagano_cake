@@ -14,7 +14,7 @@ class Public::CustomersController < ApplicationController
   
   def withdraw
     @customer = current_customer
-    @customer.withdrawal_status = true
+    @customer.is_active = false
     if @customer.save
       reset_session
       redirect_to root_path
