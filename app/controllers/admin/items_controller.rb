@@ -4,6 +4,10 @@ class Admin::ItemsController < ApplicationController
   def new
     @item = Item.new
   end
+
+  def index
+    @items = Item.page(params[:page])
+  end
   
   def create
     @item = Item.new(item_params)
