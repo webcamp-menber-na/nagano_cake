@@ -1,0 +1,29 @@
+<div class="container"> 
+  <h3 class="my-5">商品編集</h2>
+  <div class="col-xs-6">
+    <%= form_with model:@item, url:admin_item_path(@item.id), method: :patch do |f| %>
+      <div class="form-group row">
+        <%= f.label '商品画像', class: 'col-sm-2 col-form-label' %>
+        <%= f.file_field :image, accept: "image/*", class:"col-8 p-0" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label '商品名', class: 'col-sm-2 col-form-label' %>
+        <%= f.text_field :name, placeholder: "商品名", class:"col-sm-4" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label '商品説明', class: 'col-sm-2 col-form-label' %>
+        <%= f.text_area :introduction, placeholder: "ここに説明文を記述します", rows:"5",class:"col-sm-4" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label '税抜価格', class: 'col-sm-2 col-form-label align-items-center' %>
+        <%= f.text_field :price, placeholder: "1000", class:"col-sm-4" %>
+        <span class="d-flex align-items-center">　円</span>
+      </div>
+      <div class="form-group row offset-3">
+        <div class="col-sm-3">
+          <%= f.submit "変更を保存", class:"btn btn-success", style: "width: 70%;" %>
+        </div>
+      </div>
+    <% end %>
+  </div>                                                                                         
+</div>
