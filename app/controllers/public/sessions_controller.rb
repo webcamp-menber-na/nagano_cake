@@ -41,7 +41,7 @@ class Public::SessionsController < Devise::SessionsController
     # 【処理内容2】 アカウントを取得できなかった場合、このメソッドを終了する
     if customer
     # 【処理内容3】 取得したアカウントのパスワードと入力されたパスワードが一致していない場合、このメソッドを終了する
-      if customer.valid_password?(params[:customer][:password]) && customer.is_deleted
+      if customer.valid_password?(params[:customer][:password]) && !customer.is_active
         flash[:alert] = "退会済のアカウントです。ご利用いただけません。"
         redirect_to new_customer_session_path
       end
