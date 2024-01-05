@@ -10,10 +10,23 @@
         <thead>
           <tr>
             <th class="table-active">商品名</th>
+            <th class="table-active">単価(税込)</th>
+            <th class="table-active">数量</th>
+            <th class="table-active">小計</th>
+            <th class="table-active">"　"</th>
           </tr>
         </thead>
         <tbody>
           <% current_customer.cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= image_tag cart_item.item.image, :size => '50' %>
+              <%= cart_item.item.name %>
+            </td>
+            <td>
+              ¥<%= cart_item.item.add_tax_price.to_s(:delimited) %>
+            </td>
+          </tr>
           <% end %>
         </tbody>
       </table>
