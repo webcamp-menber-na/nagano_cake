@@ -7,9 +7,9 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if params[:order][:select_address] == "1"
-      @order.ship_postalcode = current_customer.ship_postalcode
-      @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.ship_postalcode = current_customer.postal_code
+      @order.ship_address = current_customer.address
+      @order.ship_name = current_customer.first_name + current_customer.last_name
 
     ## 登録済住所実装したときは以下に変更する
     # elsif [:order][:select_address] == "2"
@@ -50,10 +50,12 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_detail = OrderDetail.where(order_id: @order.id)
   end
 
   private
+  
   def order_params
-    params.require(:order).permit(:customer_id, :payment_method, :ship_postalcode, :address, :name, :shipping_cost, :amount_paid, :status)
+    params.require(:order).permit(:customer_id, :payment_method, :ship_postalcode, :ship_address, :ship_name, :shipping_cost, :amount_paid, :status)
   end
 end
