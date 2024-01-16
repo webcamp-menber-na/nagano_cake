@@ -69,15 +69,14 @@
   </div>
 
   <div class="row">
-    <%= form_with model: @order_new , url: "/orders" , local:true do |f| %>
+    <%= form_with model: @order_new, url: "/public/orders", method: :post, local: true do |f| %>
       <%= f.hidden_field :customer_id, value: current_customer.id %>
       <%= f.hidden_field :payment_method, value:  @order.payment_method %>
-      <%= f.hidden_field :shipping_cost, value: 800 %>
+      <%= f.hidden_field :postage, value: 800 %>
       <%= f.hidden_field :ship_postalcode, value: @order.ship_postalcode %>
-      <%= f.hidden_field :amount_paid, value: @sum + 800%>
-      <%= f.hidden_field :ship_address, value: @order.ship_address%>
+      <%= f.hidden_field :payment_amount, value: @sum + 800 %>
+      <%= f.hidden_field :ship_address, value: @order.ship_address %>
       <%= f.hidden_field :ship_name, value: @order.ship_name %>
-      <%= f.hidden_field :status, value: "wait_payment"%>
       <%= f.submit "注文を確定する", class: "btn btn-success font-weight-bold m-1" %>
     <% end %>
   </div>

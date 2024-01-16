@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
 
     CartItem.destroy_all
-    redirect_to orders_complete_path
+    redirect_to public_orders_complete_path
   end
 
   def index
@@ -56,6 +56,6 @@ class Public::OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:order).permit(:customer_id, :payment_method, :ship_postalcode, :ship_address, :ship_name, :shipping_cost, :amount_paid, :status)
+    params.require(:order).permit(:customer_id, :payment_method, :ship_postalcode, :ship_address, :ship_name, :payment_amount, :postage)
   end
 end
