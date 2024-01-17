@@ -1,28 +1,35 @@
 Rails.application.routes.draw do
-  root 'public/homes#top'
-    #管理者用
-    devise_for :admin, skip: [:registrations, :passwords], controllers: {
-      sessions: "admin/sessions"
-    }
   
-    #顧客用
-    devise_for :customers, skip: [:passwords], controllers: {
-      registrations: "public/registrations",
-      sessions: 'public/sessions'
-    }
   
-  namespace :public do
+  #顧客用
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  
+  scope module: :public do
+    # homes
+    root to: 'homes#top'
     get '/about' => 'homes#about'
-    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
-    resources :items,only: [:index, :show, :create]
-    resources :cart_items,only: [:index, :update, :create, :destroy]
-    resources :orders,only: [:new, :index, :create, :show]
-    post '/orders/confirm' => 'orders#confirm'
-    get '/orders/complete' => 'orders#complete'
-    get "/customers/confirm" => "customers#confirm"
-    patch "/customers/withdraw" => "customers#withdraw"
-    resources :customers, path: 'my_page', only: [:show, :edit, :update]
-    get '/customers/confirm' => 'customers#confirm'
+
+    # customers
+    get 'customers/mypage' => 'customers#show'
+    get 'customers/infomation/edit' => 'customers#edit'
+    patch 'customers/infomation' => 'customers#update'
+    get 'customers/confirm' => 'customers#confirm'
+    patch 'customers/withdraw' => 'customers#withdraw'
+
+    # items
+    resources :items, only: [:index, :show]
+    # cart_items
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :update, :create, :destroy]
+
+    # orders
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete' => 'orders#complete'
+    resources :orders, only: [:new, :create, :index, :show]
+
   end
     
     
@@ -32,4 +39,20 @@ Rails.application.routes.draw do
     resources :customers,only: [:index, :show, :edit, :update]
     resources :orders,only: [:show]
   end
+  
+  #管理者用
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+   sessions: "admin/sessions"
+  }
+  
+  namespace :admin do
+    get '/' => 'homes#top'
+
+    resources :items, only: [:index, :new, :show, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:show, :update]
+    resources :order_items, only: [:update]
+
+  end
+
 end

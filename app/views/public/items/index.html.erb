@@ -1,19 +1,29 @@
+<!--商品一覧画面-->
 <div class="container"> 
-  <div class="col-8">
-    <div class="row text-center col-4 my-3 ml-3 ">
-      <h3 class="my-5">商品一覧</h3>
-      <div class="mt-2"><span>（全<%= @items.count %>件）</span></div>
-    </div>
-    <div class="row">
-      <% @items.each do |item| %>
-    　　<div class="my-2">
-          <%= link_to public_item_path(item) do %>
+  <div class="row mt-5">
+    <h2>商品一覧</h2> <p class="d-flex align-items-end">　(全<%= "#{@sum.count}" %>件)</p>
+  </div>
+  
+  <div class="row mt-1">
+    <% @items.first(8).each do |item| %>
+      <div class="col-md-3 mt-3 mb-5">
+        <div>
+          <%= link_to item_path(item.id) do %>
             <%= image_tag item.image, size: "210x150" %>
-            <p class="card-title text-dark text-center"><%= item.name %></p>
           <% end %>
         </div>
-      <% end %>
+        <div>
+          <%= item.name %>
+        </div>
+        <div>
+          ￥<%= item.price.to_s(:delimited) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-2 mx-auto">
+      <%= paginate @items %>
     </div>
   </div>
 </div>
-
