@@ -27,8 +27,8 @@
         <tr>
           <td class="font-weight-bold">配送先</td>
           <td>
-            <%= '〒' + @order.postal_code + ' ' + @order.address %><br>
-            <%= @order.name %>
+            <%= '〒' + @order.ship_postalcode + ' ' + @order.ship_address %><br>
+            <%= @order.ship_name %>
           </td>
         </tr>
 
@@ -55,27 +55,27 @@
         </thead>
         <tbody>
           <% sum = 0 %>
-          <% @order_items.each do |order_item| %>
+          <% @order_details.each do |order_detail| %>
             <tr>
               <td>
-                <!--order_item.item.name-->
-                <%= order_item.item.name %>
+                <!--order_detail.item.name-->
+                <%= order_detail.item.name %>
               </td>
 
               <td>
                 <!--unit_price-->
-                <%= order_item.unit_price %>
+                <%= order_detail.price %>
               </td>
 
               <td>
                 <!--quantity-->
-                <%= order_item.quantity %>
+                <%= order_detail.quantity %>
               </td>
 
               <td>
-                <!--= unit_price x quantity-->
-                <%= order_item.unit_price * order_item.quantity %>
-                <% sum += (order_item.unit_price * order_item.quantity) %>
+                <!--= price x quantity-->
+                <%= order_detail.price * order_detail.quantity %>
+                <% sum += (order_detail.price * order_detail.quantity) %>
               </td>
             </tr>
 
@@ -86,8 +86,8 @@
     <div class="col">
       <table class="table table-borderless">
         <tr><td class="font-weight-bold">商品合計</td><td><%= sum.to_s(:delimited) + '円' %></td></tr>
-        <tr><td class="font-weight-bold">送料</td><td><%= @order.shipping_cost.to_s(:delimited) + '円' %></td></tr>
-        <tr><td class="font-weight-bold">請求金額合計</td><td class="font-weight-bold"><%= (@order.amount_paid).to_s(:delimited) + '円' %></td></tr>
+        <tr><td class="font-weight-bold">送料</td><td><%= @order.postage.to_s(:delimited) + '円' %></td></tr>
+        <tr><td class="font-weight-bold">請求金額合計</td><td class="font-weight-bold"><%= (@order.payment_amount).to_s(:delimited) + '円' %></td></tr>
       </table>
     </div>
   </div>

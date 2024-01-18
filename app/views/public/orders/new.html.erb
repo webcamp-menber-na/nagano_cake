@@ -1,3 +1,4 @@
+<!--注文情報入力画面-->
 <div class="container">
   <div class="row">
     <div class="col-md-3 mt-5">
@@ -5,7 +6,7 @@
     </div>
     <div class="col-md-7 mt-5"></div>
   </div>
-  <%= form_with model: @order, url: public_orders_confirm_path do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path do |f| %>
   <div class="row mt-2 mb-3 ">
     <div class="col">
       <h5 class="font-weight-bold">支払方法</h5>
@@ -31,15 +32,15 @@
       <%= f.label :select_address_3, "新しいお届け先" %></br>
       <!---->
       <div class="form-group row">
-        <label for="inputPostalCode", class="col-sm-4 col-form-label">　　郵便番号(ハイフンなし)</label>
+        <label for="inputPostalCode", class="col-sm-4 col-form-label">　郵便番号(ハイフンなし)</label>
         <%= f.text_field :postal_code, id:"inputPostalCode", class:"col-sm-3 form-control" %>
       </div>
       <div class="form-group row">
-        <label for="inputAdress", class="col-sm-4 col-form-label">　　住所</label>
+        <label for="inputAdress", class="col-sm-4 col-form-label">　住所</label>
         <%= f.text_field :address, id:"inputAdress", class:"col-sm-7 form-control" %>
       </div>
       <div class="form-group row">
-        <label for="inputToname", class="col-sm-4 col-form-label">　　宛名</label>
+        <label for="inputToname", class="col-sm-4 col-form-label">　宛名</label>
         <%= f.text_field :name, id:"inputToneme", class:"col-sm-3 form-control" %>
       </div>
       <!---->
