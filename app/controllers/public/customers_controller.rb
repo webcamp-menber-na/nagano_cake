@@ -23,7 +23,7 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
 
     #is_deletedカラムをtrueに変更する
-    @customer.update(is_active: true)
+    @customer.update(is_deleted: true)
 
     # ログアウトさせる
     reset_session
