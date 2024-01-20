@@ -1,5 +1,14 @@
 <div class="container"> 
-  <h2 class="my-5">商品一覧</h2>
+  <div class="row">
+    <div class="col-md-3 mt-5">
+      <h4 class="text-dark text-center title_bar">商品一覧</h4>
+    </div>
+    <div class="col-md-7 mt-5">
+      <%= link_to new_admin_item_path, class:'float-right' do %>
+        <i class="fa-solid fa-circle-plus fa-2x"></i>
+      <% end %>
+    </div>
+  </div>
   <div class="row mx-5 px-5">
     <table class="table table-hover table-inverse">
       <thead>
@@ -25,6 +34,10 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @items %>
+    <div class="row">
+      <div class="col-md-2 mx-auto">
+        <%= paginate @items %>
+      </div>
+    </div>
   </div>
 </div>
